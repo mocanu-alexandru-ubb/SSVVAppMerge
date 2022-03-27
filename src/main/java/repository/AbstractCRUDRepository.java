@@ -32,7 +32,8 @@ public abstract class AbstractCRUDRepository<ID, E extends HasID<ID>> implements
     public E save(E entity) throws ValidationException {
         try {
             validator.validate(entity);
-            return entities.putIfAbsent(entity.getID(), entity);
+            entities.putIfAbsent(entity.getID(), entity);
+            return entities.get(entity.getID());
         }
         catch (ValidationException ve) {
             System.out.println("Entitatea nu este valida! \n");

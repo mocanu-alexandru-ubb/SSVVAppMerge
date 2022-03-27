@@ -8,7 +8,7 @@ public class StudentXMLRepository extends AbstractXMLRepository<String, Student>
 
     public StudentXMLRepository(Validator<Student> validator, String XMLfilename) {
         super(validator, XMLfilename);
-        loadFromXmlFile();
+        //loadFromXmlFile();
     }
 
     protected Element getElementFromEntity(Student student, Document XMLdocument) {

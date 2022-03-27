@@ -12,7 +12,7 @@ public class Main {
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
 
-        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
+        StudentRepository fileRepository1 = new StudentRepository(studentValidator);
         TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
         NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 

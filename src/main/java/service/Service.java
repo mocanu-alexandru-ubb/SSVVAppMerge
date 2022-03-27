@@ -5,6 +5,7 @@ import domain.Pair;
 import domain.Student;
 import domain.Tema;
 import repository.NotaXMLRepository;
+import repository.StudentRepository;
 import repository.StudentXMLRepository;
 import repository.TemaXMLRepository;
 
@@ -13,11 +14,11 @@ import java.time.temporal.WeekFields;
 import java.util.Locale;
 
 public class Service {
-    private StudentXMLRepository studentXmlRepo;
+    private StudentRepository studentXmlRepo;
     private TemaXMLRepository temaXmlRepo;
     private NotaXMLRepository notaXmlRepo;
 
-    public Service(StudentXMLRepository studentXmlRepo, TemaXMLRepository temaXmlRepo, NotaXMLRepository notaXmlRepo) {
+    public Service(StudentRepository studentXmlRepo, TemaXMLRepository temaXmlRepo, NotaXMLRepository notaXmlRepo) {
         this.studentXmlRepo = studentXmlRepo;
         this.temaXmlRepo = temaXmlRepo;
         this.notaXmlRepo = notaXmlRepo;

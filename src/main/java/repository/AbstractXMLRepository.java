@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.IOException;
 
 public abstract class AbstractXMLRepository<ID, E extends HasID<ID>> extends AbstractCRUDRepository<ID, E> {
@@ -29,7 +30,9 @@ public abstract class AbstractXMLRepository<ID, E extends HasID<ID>> extends Abs
 
     protected void loadFromXmlFile() {
         try {
-            Document XMLdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(XMLfilename);
+            File file = new File(this.XMLfilename);
+            file.createNewFile();
+            Document XMLdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file.toURI().toString());
             Element root = XMLdocument.getDocumentElement();
             NodeList list = root.getChildNodes();
 
