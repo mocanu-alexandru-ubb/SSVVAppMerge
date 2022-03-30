@@ -51,4 +51,15 @@ class ServiceTest {
     @Test
     void saveAssignmentIDempty() { Assertions.assertEquals(1, service.saveTema("", "desc2", 10, 10)); }
 
+    @Test
+    void saveGradeNoStudent() {
+        Assertions.assertEquals(1, service.saveNota("studentNuExista","temaNuExista", 8, 2, "NU"));
+    }
+    @Test
+
+    void saveGradeGood() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 4, 2);
+        Assertions.assertEquals(0, service.saveNota("student","tema", 8, 2, "NU"));
+    }
 }
