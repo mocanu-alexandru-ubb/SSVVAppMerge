@@ -16,6 +16,8 @@ class ServiceTest {
     private NotaXMLRepository notaXmlRepo = new NotaXMLRepository(new NotaValidator(), "nota_mock.xml");
 
     Service service = new Service(studentXmlRepo, temaXmlRepo, notaXmlRepo);
+    // addStudent functionality
+
     // Group tests
     @Test
     void saveStudentOkay() {
@@ -41,4 +43,12 @@ class ServiceTest {
     void saveStudentNameNull() { Assertions.assertEquals(1, service.saveStudent("student1", null, 123)); }
     @Test
     void saveStudentNameEmpty() { Assertions.assertEquals(1, service.saveStudent("student1", "", 123)); }
+
+    // addAssignment functionality
+    @Test
+    void saveAssignmentIDnull() { Assertions.assertEquals(1, service.saveTema(null, "desc1", 12, 12)); }
+
+    @Test
+    void saveAssignmentIDempty() { Assertions.assertEquals(1, service.saveTema("", "desc2", 10, 10)); }
+
 }
