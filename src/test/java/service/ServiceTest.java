@@ -53,7 +53,7 @@ class ServiceTest {
 
     @Test
     void saveGradeNoStudent() {
-        Assertions.assertEquals(1, service.saveNota("studentNuExista","temaNuExista", 8, 2, "NU"));
+        Assertions.assertEquals(-1, service.saveNota("studentNuExista","temaNuExista", 8, 2, "NU"));
     }
     @Test
 
