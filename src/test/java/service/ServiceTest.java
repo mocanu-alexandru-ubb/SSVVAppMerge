@@ -55,11 +55,48 @@ class ServiceTest {
     void saveGradeNoStudent() {
         Assertions.assertEquals(-1, service.saveNota("studentNuExista","temaNuExista", 8, 2, "NU"));
     }
-    @Test
 
+    @Test
     void saveGradeGood() {
         service.saveStudent("student", "nume", 933);
         service.saveTema("tema", "tema", 4, 2);
         Assertions.assertEquals(0, service.saveNota("student","tema", 8, 2, "NU"));
+    }
+
+    @Test
+    void saveGradeDeadlineMissedByOne() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 4, 2);
+        Assertions.assertEquals(0, service.saveNota("student","tema", 8, 5, "NU"));
+        service.findAllNote().forEach(nota -> Assertions.assertEquals(5.5, nota.getNota()));
+    }
+
+    @Test
+    void saveGradeDeadlineMissedByOneDeadlineInvalid() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 1, 1);
+        Assertions.assertEquals(1, service.saveNota("student","tema", 8, 0, "NU"));
+    }
+
+    @Test
+    void saveGradeDeadlineMissedByThree() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 4, 2);
+        Assertions.assertEquals(0, service.saveNota("student","tema", 8, 7, "NU"));
+        service.findAllNote().forEach(nota -> Assertions.assertEquals(1, nota.getNota()));
+    }
+
+    @Test
+    void saveGradeDeadlineMissedByThreeDeadlineInvalid() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 1, 1);
+        Assertions.assertEquals(1, service.saveNota("student","tema", 8, -1, "NU"));
+    }
+
+    @Test
+    void saveGradeGoodDeadlineInvalid() {
+        service.saveStudent("student", "nume", 933);
+        service.saveTema("tema", "tema", 4, 2);
+        Assertions.assertEquals(1, service.saveNota("student","tema", 8, -1, "NU"));
     }
 }
