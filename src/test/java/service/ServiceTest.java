@@ -99,4 +99,34 @@ class ServiceTest {
         service.saveTema("tema", "tema", 4, 2);
         Assertions.assertEquals(1, service.saveNota("student","tema", 8, -1, "NU"));
     }
+
+    public void addStudent() {
+        Assertions.assertEquals(0, service.saveStudent("student", "nume", 933));
+    }
+
+    public void addAssignment() {
+        Assertions.assertEquals(0, service.saveTema("tema", "tema", 4, 2));
+    }
+
+    public void addGrade() {
+        Assertions.assertEquals(0, service.saveNota("student","tema", 8, 2, "NU"));
+    }
+
+    @Test
+    public void addStudent_integration() {
+        addStudent();
+    }
+
+    @Test
+    public void addAssignment_integration() {
+        addStudent();
+        addAssignment();
+    }
+
+    @Test
+    public void addGrade_integration() {
+        addStudent();
+        addAssignment();
+        addGrade();
+    }
 }
