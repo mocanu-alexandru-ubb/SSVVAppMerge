@@ -1,5 +1,8 @@
 package service;
 
+import domain.Nota;
+import domain.Student;
+import domain.Tema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import repository.NotaXMLRepository;
@@ -9,14 +12,44 @@ import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 class ServiceTest {
 
     private StudentRepository studentXmlRepo = new StudentRepository(new StudentValidator());
     private TemaXMLRepository temaXmlRepo = new TemaXMLRepository(new TemaValidator(), "tema_mock.xml");
     private NotaXMLRepository notaXmlRepo = new NotaXMLRepository(new NotaValidator(), "nota_mock.xml");
 
+    private StudentRepository mockedStudentRepo = mock(StudentRepository.class);
+    private TemaXMLRepository mockedTemaXmlRepo = mock(TemaXMLRepository.class);
+    private NotaXMLRepository mockedNotaXmlRepo = mock(NotaXMLRepository.class);
+
     Service service = new Service(studentXmlRepo, temaXmlRepo, notaXmlRepo);
+
+    Service mockedService = new Service(mockedStudentRepo, mockedTemaXmlRepo, mockedNotaXmlRepo);
     // addStudent functionality
+
+    @Test
+    void testMockAddStudent() {
+        mockedService.saveStudent("2", "nume", 922);
+        verify(mockedStudentRepo).save(any());
+    }
+    @Test
+    void testMockAddAssignement() {
+        mockedService.saveTema("2", "descriere", 2, 4);
+        verify(mockedTemaXmlRepo).save(any());
+    }
+    @Test
+    void testMockAddGradet() {
+        when(mockedStudentRepo.findOne("2")).thenReturn(new Student("2", "mock", 922));
+        when(mockedTemaXmlRepo.findOne("2")).thenReturn(new Tema("2", "desc", 2, 4));
+        mockedService.saveNota("2", "2", 8, 2, "FEED");
+        verify(mockedNotaXmlRepo).save(any());
+    }
 
     // Group tests
     @Test
